@@ -141,7 +141,7 @@
         </div>
          | 
         <div class="weather-footer-item">
-            <i><a data-th-href="@{/weather/{city}(city=*{cityName}, units=${units == 'metric' ? 'imperial' : 'metric'})}"
+            <i><a data-th-href="@{/weather/{city}(city=*{cityNameLowercase}, units=${units == 'metric' ? 'imperial' : 'metric'})}"
                 data-th-text="'Switch to ' + (${units == 'metric' ? 'imperial' : 'metric'})">
             </a></i>
         </div>

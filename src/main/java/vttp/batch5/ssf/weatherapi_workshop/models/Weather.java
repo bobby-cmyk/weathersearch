@@ -429,6 +429,10 @@ public class Weather {
         return cityName;
     }
 
+    public String getCityNameLowercase() {
+        return cityName.toLowerCase();
+    }
+
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
