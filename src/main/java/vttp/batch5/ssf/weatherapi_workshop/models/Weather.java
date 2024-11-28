@@ -522,7 +522,7 @@ public class Weather {
         }
 
         catch (Exception e) {
-            logger.warning("Error while parsing JSON to weather object - Error message: %s".formatted(e.getMessage()));       
+            logger.warning("Error while parsing JSON to weather object - Error message: %s.".formatted(e.getMessage()));       
         }
 
         return weather;

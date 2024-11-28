@@ -29,17 +29,21 @@ public class WeatherService {
     
     public Optional<WeatherResponse> getWeather(String city, String units) {
 
+        logger.info("Checking if %s-%s is in cache.".formatted(city, units));
+
         if(weatherRepo.isCached(city, units)) {
 
             String payload = weatherRepo.getCache(city, units);
 
-            logger.info("Retrieved %s from cache".formatted(city));
+            logger.info("Retrieved %s-%s from cache.".formatted(city, units));
 
             WeatherResponse weatherResponse = new WeatherResponse(true, payload);
 
             return Optional.of(weatherResponse);
         }
         
+        logger.info("%s-%s not in cache. Building request to api.".formatted(city, units));
+
         String baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
         String fullUrl = UriComponentsBuilder
@@ -64,9 +68,15 @@ public class WeatherService {
 
             String payload = resp.getBody();
 
+            logger.info("Successfuly exchanged for response for %s-%s.".formatted(city, units));
+
             weatherRepo.saveCache(city, units, payload);
 
+            logger.info("Saved payload of %s-%s in cache with 10 minutes expiration.".formatted(city, units));
+
             WeatherResponse weatherResponse = new WeatherResponse(false, payload);
+            
+            
 
             // Get payload
             return Optional.of(weatherResponse);

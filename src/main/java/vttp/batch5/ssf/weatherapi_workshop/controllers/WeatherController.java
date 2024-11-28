@@ -1,6 +1,7 @@
 package vttp.batch5.ssf.weatherapi_workshop.controllers;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -27,6 +28,9 @@ public class WeatherController {
 
     @Autowired
     private WeatherService weatherSvc;
+
+     // Define the logger
+    private final Logger logger = Logger.getLogger(WeatherController.class.getName());
     
     @GetMapping(path={"{city}"}, 
     produces=MediaType.APPLICATION_JSON_VALUE)
@@ -41,12 +45,15 @@ public class WeatherController {
         // If random units is added, units will be in metrics
         if (!units.equals("metric") && !units.equals("imperial")) {
             units = "metric";
+            logger.info("Invalid units entered. Units defaulted to 'metrics'.");
         }
 
         // Get weather from weather service by using the city params provided
         Optional<WeatherResponse> optWeatherResponse = weatherSvc.getWeather(city, units);
 
         if (optWeatherResponse.isEmpty()) {
+
+            logger.info("City does not exist. Redirecting user back to index.'");
 
             mav.setViewName("index");
             mav.addObject("errorMessage", "City does not exist");
@@ -56,11 +63,15 @@ public class WeatherController {
             return mav;
         }
 
+        logger.info("Processing payload for %s-%s.".formatted(city, units));
+
         WeatherResponse weatherResponse = optWeatherResponse.get();
 
         String weatherPayload = weatherResponse.getPayload();
 
         Weather weather = Weather.toWeather(weatherPayload);
+
+        logger.info("Successfully processed payload for %s-%s. Returning weather view.".formatted(city, units));
         
         // Set the view to weather.html
         mav.setViewName("weather");
