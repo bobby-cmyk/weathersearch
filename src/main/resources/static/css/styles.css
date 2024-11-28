@@ -1,0 +1,363 @@
+
+/*
+#e26f59 - orange
+#48474a - dark gray
+#f2f2f2 - light gray
+#ffffff - white
+*/
+
+:root { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: 'Inter var', sans-serif; }}
+
+
+body {
+    font-family: 'Inter var', sans-serif;
+    background-color: #f2f2f2;
+    color: #48474a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.main-container {
+    background-color: #ffffff;
+    min-width: 750px;  
+    max-width: 800px;
+    min-height: 400px;
+    width: 95%;
+    margin: 0px auto;
+    padding: 16px 16px;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styling for the title */
+.main-title {
+    font-size: 2rem; /* Large font size for the main title */
+    color: #48474a; /* Matches the design with the orange color */
+    text-align: center; /* Centers the title text */
+    margin-bottom: 26px; /* Adds spacing below the title */;
+    font-weight: 250;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column; /* Stacks form elements vertically */
+    align-items: center;
+    gap: 20px; /* Adds consistent spacing between items */
+    width: 100%; /* Ensures the form takes up full width of its parent */
+    max-width: 400px; /* Limits the width for a clean layout */
+}
+
+.form-city button {
+    flex-shrink: 0; /* Prevents the button from shrinking */
+}
+
+.form-city {
+    display: flex; /* Makes the container a flex container */
+    align-items: center; /* Vertically aligns items */
+    gap: 2x; /* Adds spacing between the input and button */
+    width: 100%; /* Ensure it spans the parent width */
+    justify-content: center; /* Aligns input and button centrally */
+}
+
+/* Form input styling */
+.form-city input[type="text"] {
+    width: 100%; /* Input takes up full width of its container */
+    min-width: 350px;
+    padding: 8px 12px; /* Adds inner spacing for better usability */
+    font-size: 1rem; /* Sets readable font size */
+    border: 2px solid #e26f59; /* Orange border for consistency */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    outline: none; /* Removes default focus outline */
+    transition: border-color 0.3s; /* Smooth transition for hover/focus effects */
+}
+
+.form-city input[type="text"]:focus {
+    border-color: #d85b4a; /* Darker orange border when focused */
+}
+
+.form-city button {
+    color: #e26f59; /* White text for contrast */
+    background-color: #ffffff00;
+    border: none; /* Removes default border */
+    width: 48px; /* Slightly larger for better usability */
+    height: 48px;
+    display: flex; /* Flexbox for centering the icon */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; /* Pointer cursor for clarity */
+    font-size: 20px; /* Icon size */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth effects */
+}
+
+.form-city button:hover {
+    color: #d85b4a; /* Slightly darker orange on hover */
+    transform: scale(1.1); /* Enlarges button slightly */
+}
+
+.form-city button:active {
+    color: #c94a3b; /* Even darker orange for active state */
+    transform: scale(1.05); /* Slightly smaller than hover for a pressed effect */
+}
+
+/* Icon inside the button */
+.form-city button i {
+    margin: 0;
+    font-size: 24px; /* Slightly larger icon size */
+}
+
+.form-units {
+    display: flex;
+    padding: 4px;
+    background-color: #f2f2f2;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    width: 150px;
+}
+  
+.form-units-input {
+    flex-grow: 1;
+}
+
+.form-units-input input[type=radio] {
+    display: none;
+}
+
+.form-units-input label {
+    display: block;
+    padding: 6px 8px;
+    color: #48474a;
+    text-align: center;
+    cursor: pointer;
+    transition : all .2s 0s ease;
+}
+
+.form-units-input input[type=radio]:checked + label {
+    background-color: #e26f59;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+/* Error message container */
+.error {
+    min-height: 20px;  /* Reserve space */
+    color: #e26f59;        /* Error text color */
+    opacity: 0;        /* Hidden by default */
+    visibility: hidden; /* Not visible */
+    margin-top: 5px;   /* Space above error */
+    transition: opacity 1s ease, visibility 1s ease; /* Fade out after 2 seconds */
+}
+
+/* Show error message */
+.error.active {
+    opacity: 1;         /* Fully visible */
+    visibility: visible; /* Visible in layout */
+    animation: fade-out 2s ease forwards;  /* Disable animation on active state */
+}
+
+/* Keyframes for fading out */
+@keyframes fade-out {
+    0%, 50% {
+        opacity: 1; /* Fully visible initially */
+        visibility: visible;
+    }
+    100% {
+        opacity: 0; /* Fully transparent at the end */
+        visibility: hidden; /* Hidden at the end */
+    }
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.weather-city, 
+.weather-time {
+    flex: 1;
+    white-space: nowrap;
+}
+
+.weather-city {
+    text-align: left;
+}
+
+.weather-time {
+    text-align: right;
+}
+
+.weather-footer {
+    margin-top: 10px;
+    font-size: small;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    min-width: 750px;  
+    max-width: 800px;
+
+}
+
+.weather-footer a {
+    color: #e26f59;
+}
+
+.weather-footer :hover {
+    color:#48474a;
+}
+
+
+/* Weather Widget Container */
+/* Weather Widget Container */
+.weather-widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #48474a;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Weather Widget Rows */
+.weather-widget-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Weather Icon */
+.widget-icon img {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)); /* Shadow only for the icon */
+}
+
+/* Temperature Section */
+.widget-temp {
+    display: flex;
+    align-items: baseline;
+    margin-left: 5px;
+}
+
+.widget-temp-degree {
+    font-size: 86px;
+    margin-right: 3px;
+}
+
+.widget-temp-unit {
+    font-size: 24px;
+    color: #48474a9a;
+}
+
+/* Weather Condition and Description */
+
+.weather-condition-description {
+    font-size: 18px;
+    text-transform: capitalize;
+    text-align: center;
+    white-space: nowrap;   
+}
+
+.weather-condition {
+    font-weight: bold;
+}
+
+.weather-description {
+    color: #48474a9a;
+}
+
+.weather-row {
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.weather-card {
+    background-color: #f2f2f24d;
+    color: #48474a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    min-width:150px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 6px;
+    height: 120px;
+    padding: 5px;
+}
+
+.card-title {
+    color: #b3aeae;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.card-details {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    height: 80px;
+    text-align: center;
+}
+
+.card-value {
+    font-size:32px;
+    font-weight: 200;
+    margin-right: 3px;
+}
+
+.card-unit {
+    font-size:16px;
+    color: #48474a9a;
+}
+
+.card-details-2 {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    text-align: center;
+}
+
+.card-value-2 {
+    font-size:22px;
+    font-weight: 200;
+    margin-right: 5px;
+}
+
+.card-unit-2 {
+    font-size:10px;
+    color: #48474a9a;
+    margin-right: 5px;
+}
+
+.card-subtitle-2 {
+    font-size:12px;
+    color: #48474a9a;
+    margin-right: 7px;
+}

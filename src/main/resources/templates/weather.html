@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-th-text="'Weather | ' + ${weather.cityName}"></title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+</head>
+<body data-th-object="${weather}">
+
+    <div class="main-container">
+
+        <div class="weather-header">
+            <div class="weather-city">
+                Current Weather in <span data-th-text="*{cityName}"></span>, <span data-th-text="*{countryName}"></span>
+            </div>
+            <div class="weather-time">
+                <span data-th-text="*{currentLocalTime}">
+            </div>
+        </div>
+
+        <div class="weather-widget">
+            <div class="weather-widget-row">
+                <div class="widget-icon">
+                    <img class="widget-icon" data-th-src="'https://openweathermap.org/img/wn/' + *{weatherIcon} + '@2x.png'">
+                </div>  
+                
+                <div class="widget-temp">
+                    <span class="widget-temp-degree" data-th-text="*{mainTempRound}"></span>
+                    <span class="widget-temp-unit" data-th-if="${units == 'metric'}">°C</span>
+                    <span class="widget-temp-unit" data-th-if="${units == 'imperial'}">°F</span>
+                </div>
+            </div>
+            <div class="weather-condition-description">
+                <span class="weather-condition" data-th-text="*{weatherMain}"></span> 
+                <span class="weather-description" data-th-text="*{weatherDescription}"></span>
+            </div>
+        </div>
+
+        <div class="weather-row">
+
+            <div class="weather-card">
+                <h3 class="card-title">Temperature</h3>
+                <div class="card-details-2">
+                    <p class="card-subtitle-2">Feels Like</p>
+                    <p class="card-value-2" data-th-text="*{mainFeelsLikeRound}"></p>
+                    <span class="card-unit-2">°</span>
+                </div>
+                <div class="card-details-2">
+                    <p class="card-subtitle-2">L | H</p>
+                    <p class="card-value-2" data-th-text="*{mainTempMinRound}"></p>
+                    <span class="card-unit-2">°</span>
+                    <p class="card-value-2" data-th-text="*{mainTempMaxRound}"></p>
+                    <span class="card-unit-2">°</span>
+                </div> 
+            </div>
+
+            <div class="weather-card">
+                <h3 class="card-title">Humidity</h3>
+                <div class="card-details">   
+                    <p class="card-value" data-th-text="*{mainHumidity}"></p>
+                    <span class="card-unit">%</span>
+                </div>
+            </div>
+
+            <div class="weather-card">
+                <h3 class="card-title">Sunrise</h3>
+                <div class="card-details">   
+                    <p class="card-value" data-th-text="*{sunriseLocalTime}"></p>
+                    <span class="card-unit" data-th-text="*{sunriseLocalUnit}"></span>
+                </div>
+            </div>
+
+            <div class="weather-card">
+                <h3 class="card-title">Sunset</h3>
+                <div class="card-details">   
+                    <p class="card-value" data-th-text="*{sunsetLocalTime}"></p>
+                    <span class="card-unit" data-th-text="*{sunsetLocalUnit}"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="weather-row">
+
+            <div class="weather-card">
+                <h3 class="card-title">Cloudiness</h3>
+                <div class="card-details">   
+                    <p class="card-value" data-th-text="*{cloudsAll}"></p>
+                    <span class="card-unit">%</span>
+                </div>
+            </div>
+
+            <div class="weather-card">
+                <h3 class="card-title">Visibility</h3>
+                <div class="card-details">   
+                    <p class="card-value" data-th-text="*{visibility}"></p>
+                    <span class="card-unit">m</span>
+                </div>
+            </div>
+
+            <div class="weather-card">
+                <h3 class="card-title">Pressure</h3>
+                <div class="card-details">   
+                    <p class="card-value" data-th-text="*{mainPressure}"></p>
+                    <span class="card-unit">hPa</span>
+                </div>
+            </div>
+
+            <div class="weather-card">
+                <h3 class="card-title">Wind</h3>
+                <div class="card-details-2">
+                    <p class="card-subtitle-2">Speed</p>
+                    <p class="card-value-2" data-th-text="*{windSpeedRound}"></p>
+                    <span class="card-unit-2" data-th-if="${units == 'metric'}">m/s</span>
+                    <span class="card-unit-2" data-th-if="${units == 'imperial'}">miles/h</span>
+                </div>
+                <div class="card-details-2">
+                    <p class="card-subtitle-2">Degree</p>
+                    <p class="card-value-2" data-th-text="*{windDeg}"></p>
+                    <span class="card-unit-2">°</span>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="weather-footer">
+        <div class="weather-footer-item">
+            <i>Retrieved from cached: <span data-th-text="${isCached}"></span></i>
+        </div>
+         | 
+        <div class="weather-footer-item">
+            <i>Data collected at <span data-th-text="*{dataCalTimeLocal}"></span></i>
+        </div>
+         | 
+        <div class="weather-footer-item">
+            <i><a data-th-href="@{/weather/{city}(city=*{cityName}, units=${units == 'metric' ? 'imperial' : 'metric'})}"
+                data-th-text="'Switch to ' + (${units == 'metric' ? 'imperial' : 'metric'})">
+            </a></i>
+        </div>
+         | 
+        <div class="weather-footer-item">
+            <i><a href="/">Search other cities</a></i>
+        </div> 
+    </div>
+</body>
+</html>
